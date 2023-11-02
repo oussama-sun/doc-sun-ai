@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-
+import Navbar from "../components/Navbar";
+import Providers from "@/components/Providers";
+import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,14 +19,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          "font-sans min-h-screen antialiased grainy",
-          inter.className
-        )}
-      >
-        {children}
-      </body>
+      <Providers>
+        <body
+          className={cn(
+            "font-sans min-h-screen antialiased grainy text-zinc-900",
+            inter.className
+          )}
+        >
+          <Toaster position="top-center" />
+          <Navbar />
+          {children}
+        </body>
+      </Providers>
     </html>
   );
 }

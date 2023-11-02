@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MaxWidthWrapper from "./components/MaxWidthWrapper";
+import MaxWidthWrapper from "../components/MaxWidthWrapper";
 import { ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
@@ -38,7 +38,7 @@ export default function Home() {
         </h1>
         <p className="mt-5 max-w-prose text-zinc-700 sm:text-lg">
           Doc-sun-ai allows you to have conversations with any PDF document.
-          Simply upload your file and start asking questions righ away.
+          Simply upload your file and start asking questions right away.
         </p>
         <Link
           className={buttonVariants({
