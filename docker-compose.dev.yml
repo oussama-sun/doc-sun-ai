@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  next-app:
+    depends_on:
+      - postgres
+    container_name: next-app
+    build:
+      context: ./next-app
+      dockerfile: dev.Dockerfile
+      
+    # Set envrionment variables based on the .env file
+    env_file:
+      - .env
+    volumes:
+      - ./next-app/src:/app/src
+      - ./next-app/public:/app/public
+      # - ./next-app/node_modules:/app/node_modules
+    restart: always
+    ports:
+      - 3000:3000
+      - 5555:5555
+
+    networks:
+      - my_network
+
+  postgres:
+   container_name: postgres
+   build:
+    context: ./postgres
+    dockerfile: dev.Dockerfile
+   environment:
+    POSTGRES_USER: dev
+    POSTGRES_PASSWORD: 1234
+    POSTGRES_DB: db
+   ports:
+     - 5432:5432
+   networks:
+    - my_network
+  # Add more containers below (nginx, postgres, etc.)
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  my_network:
+    driver: bridge
